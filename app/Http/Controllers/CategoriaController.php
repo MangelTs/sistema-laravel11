@@ -12,7 +12,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        return "Este es categoria controller";
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return "Mostrar";
     }
 
     /**

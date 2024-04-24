@@ -4,6 +4,12 @@
 ### Crear Migraciones
 Crear un controlador para gestionar los recursos de la tabla categorias
 
+
+# Si descargamos el código de github externos.
 ```bash
-    php artisan make:controller categoriaController --resource --model=categoria
+    composer update
+```
+
+```bash
+    php artisan make:controller CategoriaController --resource --model=Categoria
 ```
