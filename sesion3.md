@@ -13,3 +13,8 @@ Crear un controlador para gestionar los recursos de la tabla categorias
 ```bash
     php artisan make:controller CategoriaController --resource --model=Categoria
 ```
+
+# Si queremos ver todas las rutas, el next comando es:
+```bash
+    php artisan route:list
+```

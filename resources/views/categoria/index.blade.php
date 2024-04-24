@@ -6,6 +6,11 @@
     <title>Lista de Categorias</title>
 </head>
 <body>
+    <form action="{{route('categoria.index')}}" method="get">
+        <label for="">Buscar:</label>
+        <input type="text" name="texto" value="{{$texto}}">
+        <input type="submit" value="Buscar">
+    </form>
     <table>
         <thead>
             <tr>
@@ -19,11 +24,11 @@
             <tr>
                 <td>{{$reg->id}}</td>
                 <td>{{$reg->nombre}}</td>
-                <td>{{$reg->activo}}</td>
+                <td>{{$reg->activo?'Activo':'Inactivo'}}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{$registros->appends(["texto" => ""])}}
+    {{$registros->appends(["texto" => $texto])}}
 </body>
 </html>
