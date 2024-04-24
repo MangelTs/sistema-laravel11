@@ -24,5 +24,6 @@
             @endforeach
         </tbody>
     </table>
+    {{$registros->appends(["texto" => ""])}}
 </body>
 </html>
