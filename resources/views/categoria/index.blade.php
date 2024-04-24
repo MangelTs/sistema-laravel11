@@ -11,6 +11,7 @@
         <input type="text" name="texto" value="{{$texto}}">
         <input type="submit" value="Buscar">
     </form>
+    <a href="{{route('categoria.create')}}">Nuevo</a>
     <table>
         <thead>
             <tr>
