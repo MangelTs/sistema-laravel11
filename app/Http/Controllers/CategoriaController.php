@@ -12,7 +12,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return "Este es categoria controller";
+        $categoria=Categoria::paginate(10);
+        return view('categoria.index', compact('registros'));
     }
 
     /**
