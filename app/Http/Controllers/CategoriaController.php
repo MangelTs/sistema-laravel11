@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriaRequest;
 
 class CategoriaController extends Controller
 {
@@ -12,10 +13,10 @@ class CategoriaController extends Controller
      */
     public function index(Request $request)
     {
-        #dd($request);
-        $texto=trim($request->get('texto')); 
+        //dd($request);
+        $texto=trim($request->get('texto'));
         $registros=Categoria::where('nombre', 'like', '%' . $texto . '%')->paginate(10);
-        return view('categoria.index', compact('registros', 'texto'));
+        return view('categoria.index',compact('registros','texto'));
     }
 
     /**
@@ -23,19 +24,23 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('categoria.create');
+        $categoria= new Categoria();
+        return view('categoria.action',['categoria'=>new Categoria()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
         $registro = new Categoria;
         $registro->nombre=$request->input('nombre');
         $registro->imagen="";
         $registro->save();
-        return redirect()->route('categoria.index');
+        return response()->json([
+            'status'=> 'success',
+            'message'=>'Registro creado satisfactoriamente'
+        ]);
     }
 
     /**
@@ -49,24 +54,38 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categoria $categoria)
+    public function edit($id)
     {
-        //
+        $categoria=Categoria::findOrFail($id);
+        return view('categoria.action',compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(CategoriaRequest $request, $id)
     {
-        //
+        $categoria=Categoria::findOrFail($id);
+        $categoria->nombre=$request->nombre;
+        $categoria->save();
+
+        return response()->json([
+            'status'=> 'success',
+            'message'=> 'Actualización de datos satisfactoria'
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        $registro = Categoria::findOrFail($id);
+        $registro->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => $registro->nombre . ' Eliminado'
+        ]);
     }
 }
